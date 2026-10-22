@@ -1,18 +1,16 @@
-
-
 # Personal Productivity Manager
 
-A lightweight, terminal-based task management application written in Python. It allows users to track daily goals, set priorities, track deadlines, and monitor task completion status through a simple interactive command-line interface.
+A lightweight, terminal-based task management application written in Python. It lets you track daily goals, set priorities, track deadlines, and monitor completion status through an interactive command-line interface.
 
 ---
 
 ## Features
 
-- **Add Tasks**: Record a task name, due date (`YYYY-MM-DD`), priority level (`high`, `medium`, `low`), and initial status (`pending`, `completed`).
-- **View All Tasks**: Inspect your full task list with all associated metadata.
-- **Remove Tasks**: Delete an existing task by specifying its name.
-- **Mark Complete**: Update the status of any task directly to `completed`.
-- **Interactive Menu**: Continuous loop allowing multiple operations in one session until explicitly exited.
+- **Add Tasks**: record a task name, due date (`YYYY-MM-DD`), priority (`high`, `medium`, `low`), and status (`pending`, `completed`).
+- **View All Tasks**: inspect the full task list with all metadata and task IDs.
+- **Remove Tasks**: delete a task by its ID.
+- **Mark Complete**: update any task's status to `completed` by its ID.
+- **Interactive Menu**: continuous loop until explicitly exited.
 
 ---
 
@@ -20,6 +18,26 @@ A lightweight, terminal-based task management application written in Python. It 
 
 ```text
 personal-productivity-manager/
-│
-├── main.py          # Core application script containing the menu loop and functions
-└── README.md        # Project documentation
+|
+|-- productive.py   # menu loop, validation and task functions
+`-- README.md       # project documentation
+```
+
+---
+
+## Run it
+
+```bash
+python productive.py
+```
+
+Python 3.10+ required (the type hints use `dict | None`).
+
+---
+
+## Input validation
+
+- Dates are parsed with `datetime.strptime`, so `2026-13-45` is rejected instead of stored.
+- Priority and status are checked against allowed values and re-prompt on a typo.
+- An empty task name is rejected.
+- Tasks are addressed by ID, so two tasks with the same name no longer collide.
